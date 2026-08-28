@@ -1,0 +1,35 @@
+# Ghostty — main config
+# Portable settings shared across machines.
+# Modular pieces are pulled in via the config-file includes at the bottom.
+#
+# Reload:  Cmd+Shift+,      Validate after edits:  ghostty +validate-config
+# NOTE: Ghostty has NO inline comments — every '#' must be on its own line.
+
+# ── Fonts ───────────────────────────────────────────────
+# Patched Nerd Font variant (installed) — guarantees icon/powerline glyphs.
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+# A little leading makes long terminal output easier to scan.
+adjust-cell-height = 12%
+
+# ── Window feel ─────────────────────────────────────────
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+mouse-hide-while-typing = true
+copy-on-select = true
+confirm-close-surface = true
+
+# ── Shell integration ───────────────────────────────────
+shell-integration = detect
+shell-integration-features = cursor,sudo,title,ssh-terminfo
+
+# ── macOS niceties (accepted everywhere; no-ops off macOS) ──
+macos-titlebar-style = transparent
+macos-option-as-alt = true
+
+# ── Modular includes (paths are relative to THIS file) ──
+config-file = ./theme
+config-file = ./keybinds
+# Optional, per-machine, gitignored. Create it from local.example.
+config-file = ?./local

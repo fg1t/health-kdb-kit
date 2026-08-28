@@ -1,0 +1,22 @@
+# Appearance — theme, colors, transparency, cursor.
+# Swap the look here without touching the main config.
+# Browse built-ins:  ghostty +list-themes
+# Custom themes live in ./themes/ (see themes/example-mocha)
+
+theme = Catppuccin Mocha
+background-opacity = 0.96
+# background-blur is macOS / KDE only:
+background-blur = 20
+cursor-style = bar
+# Steady cursor (no blink) reads calmer with the bar style.
+cursor-style-blink = false
+
+# ── Polish (complements the Mocha palette) ──────────────
+# Wider gamut on modern Mac displays — richer Mocha colors.
+window-colorspace = display-p3
+# Bold text uses the bright palette so it actually stands out.
+bold-is-bright = true
+# Floor on text/background contrast — keeps dim Mocha greys legible.
+minimum-contrast = 1.1
+# Dim the inactive pane so the focused split is obvious.
+unfocused-split-opacity = 0.85

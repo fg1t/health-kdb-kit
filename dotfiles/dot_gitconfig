@@ -1,0 +1,36 @@
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+[user]
+	name = __HER_NAME__
+	email = __HER_GMAIL__
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+	line-numbers = true
+	side-by-side = true
+	syntax-theme = Catppuccin Mocha
+	minus-style = "syntax #43242b"
+	minus-emph-style = "syntax #6f3030"
+	plus-style = "syntax #283618"
+	plus-emph-style = "syntax #3f5323"
+	line-numbers-minus-style = "#fb4934"
+	line-numbers-plus-style = "#b8bb26"
+	line-numbers-zero-style = "#928374"
+	line-numbers-left-style = "#665c54"
+	line-numbers-right-style = "#665c54"
+	file-style = "#fabd2f bold"
+	file-decoration-style = "#fabd2f ul"
+	hunk-header-style = file line-number syntax
+	hunk-header-decoration-style = "#665c54 box"
+	hyperlinks = true
+	hyperlinks-file-link-format = nvim://open?file={path}&line={line}
+[merge]
+	conflictStyle = zdiff3

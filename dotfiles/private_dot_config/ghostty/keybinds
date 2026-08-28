@@ -1,0 +1,20 @@
+# Keybindings.
+# Discover defaults:  ghostty +list-keybinds --default
+# All actions:        ghostty +list-actions
+
+# Quick drop-down terminal from anywhere.
+# First use prompts for macOS Accessibility permission (needed for global:).
+# Use the literal backtick key, not the name "grave".
+keybind = global:cmd+`=toggle_quick_terminal
+quick-terminal-position = top
+
+# Jump between shell prompts (needs shell integration):
+keybind = cmd+up=jump_to_prompt:-1
+keybind = cmd+down=jump_to_prompt:1
+
+# Rename the current tab. Sets an EXPLICIT tab title that overrides the
+# shell-integration auto-title, so the name you type sticks.
+# Press cmd+shift+i, type a name, hit enter.
+keybind = cmd+shift+i=prompt_tab_title
+
+# (No terminal-level splits here — splits live in herdr, the interactive mux.)

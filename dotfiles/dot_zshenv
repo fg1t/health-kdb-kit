@@ -1,0 +1,5 @@
+# Bootstrap only. The real zsh config lives in ~/.config/zsh (git-tracked).
+# zsh always reads this file first; setting ZDOTDIR here makes it read
+# .zprofile/.zshrc/.zlogin from there. .zshenv is NOT re-read, so source it.
+export ZDOTDIR="$HOME/.config/zsh"
+[ -f "$ZDOTDIR/.zshenv" ] && source "$ZDOTDIR/.zshenv"

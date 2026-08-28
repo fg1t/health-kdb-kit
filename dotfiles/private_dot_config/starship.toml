@@ -1,0 +1,128 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# starship — catppuccin-powerline (Mocha), wizard build v5.
+# Layout: gray OS chip → blue dir block (bold white,  folder) →
+# green git block (dark text, "on   branch ⇡n") → arrows () between all
+# blocks → right-aligned gray clock "at HH:MM:SS PM " opened by .
+# Duration/exit-code kept from the wizard; python block dropped.
+# Colors: chip/clock #a6adc8 (subtext0), dir #89b4fa (blue), git #a6e3a1
+# (green), dark text #45475a (surface1).
+
+palette = 'catppuccin_mocha'
+
+format = """
+$os\
+[](bg:#70b1ff fg:#ffffff)\
+$directory\
+[](bg:green fg:#70b1ff)\
+$git_branch\
+$git_status\
+[](fg:green)\
+$cmd_duration\
+$status\
+$fill\
+$time\
+$line_break\
+$jobs\
+$character"""
+
+# ── Line 1 ──────────────────────────────────────────────────────────────────
+[os]
+disabled = false
+style = "bg:#ffffff fg:#11111b"
+format = '[ $symbol ]($style)'
+
+[os.symbols]
+Macos = ""
+Ubuntu = ""
+Linux = ""
+Redhat = ""
+RedHatEnterprise = ""
+Windows = ""
+
+[directory]
+# Full path (wizard choice) — no truncation, not repo-rooted.
+style = "bg:#70b1ff fg:#11111b"
+format = "[  $path ]($style)"
+truncation_length = 0
+truncate_to_repo = false
+
+[git_branch]
+symbol = " "
+style = "bg:green fg:surface1"
+format = '[ on  $symbol$branch ]($style)'
+
+[git_status]
+# Counts, tig/lazygit-style: !modified +staged ?untracked ⇡ahead ⇣behind
+style = "bg:green fg:surface1"
+format = '([$all_status$ahead_behind ]($style))'
+modified = "!${count}"
+staged = "+${count}"
+untracked = "?${count}"
+deleted = "✘${count}"
+renamed = "»${count}"
+stashed = "≡${count}"
+conflicted = "=${count}"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+
+[cmd_duration]
+min_time = 2000
+style = "fg:teal"
+format = " [took $duration]($style)"
+
+[status]
+# Numeric exit code of the failed command (the ❯ below also turns red).
+disabled = false
+symbol = "✘ "
+style = "bold fg:red"
+format = " [$symbol$status]($style)"
+
+[fill]
+symbol = " "
+
+[time]
+disabled = false
+time_format = "%I:%M:%S %p"
+style = "bg:overlay0 fg:#cdd6f4"
+format = '[](fg:overlay0)[ at $time  ]($style)'
+
+# ── Line 2: input ───────────────────────────────────────────────────────────
+[jobs]
+symbol = "✦"
+style = "fg:lavender"
+format = "[$symbol$number]($style) "
+
+[character]
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

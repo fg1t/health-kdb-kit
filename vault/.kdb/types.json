@@ -1,0 +1,7 @@
+{
+  "studies":       { "type": "Study",        "section": "Studies" },
+  "claims":        { "type": "Claim",        "section": "Claims" },
+  "interventions": { "type": "Intervention", "section": "Interventions" },
+  "conditions":    { "type": "Condition",    "section": "Conditions" },
+  "topics":        { "type": "Topic",        "section": "Topics" }
+}

@@ -1,0 +1,22 @@
+onboarding = false
+# herdr — main config
+# Full annotated defaults: `herdr --default-config`
+# Reload inside herdr: prefix+shift+r
+
+[theme]
+# Matches Ghostty (Catppuccin Mocha family).
+name = "catppuccin"
+auto_switch = false
+
+[terminal]
+# Use the machine's native shell in panes. Empty = $SHELL then /bin/sh.
+default_shell = ""
+# shell_mode left at default ("auto"): interactive panes already get the full
+# environment from the shell's interactive rc files, so forcing login mode
+# buys nothing.
+
+[keys]
+# ctrl+g leader — no Neovim (page-up) or readline (beginning-of-line)
+# conflict. herdr is the interactive mux for humans; tmux (prefix ctrl+s)
+# is reserved for fai's worker plumbing.
+prefix = "ctrl+g"

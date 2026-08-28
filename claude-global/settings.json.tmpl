@@ -1,0 +1,34 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash __HOME__/.claude/statusline-command.sh"
+  },
+  "permissions": {
+    "allow": [
+      "Read", "Grep", "Glob",
+      "Bash(cd __HOME__/Notes/kdb && python3 .scripts/lint.py:*)",
+      "Bash(cd __HOME__/Notes/kdb && python3 .scripts/regen-index.py:*)",
+      "Bash(python3 __HOME__/Notes/kdb/.scripts/lint.py:*)",
+      "Bash(python3 __HOME__/Notes/kdb/.scripts/regen-index.py:*)",
+      "Bash(git -C __HOME__/Notes/kdb status:*)",
+      "Bash(git -C __HOME__/Notes/kdb log:*)",
+      "Bash(git -C __HOME__/Notes/kdb diff:*)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "__HOME__/.claude/hooks/kdb-inbox-check.sh" }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "__HOME__/.claude/hooks/kdb-index-inject.sh" }
+        ]
+      }
+    ]
+  }
+}

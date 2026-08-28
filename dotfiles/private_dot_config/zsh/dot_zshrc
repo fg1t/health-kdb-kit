@@ -1,0 +1,70 @@
+# ── Free ctrl+s / ctrl+q from terminal flow control (tmux prefix is ctrl+s) ───
+[[ -t 0 ]] && stty -ixon
+
+# (manual git-branch prompt disabled — the prompt theme renders git status itself)
+# zstyle ':vcs_info:git:*' formats ' (%b)'   # show git branch
+
+fpath=("${ZDOTDIR:-$HOME/.config/zsh}/completions" $fpath)
+autoload -Uz compinit
+# Full security rescan at most once a day; otherwise trust the cached dump (-C).
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# ── Prompt: starship (cross-shell) ────────────────────────────────────────────
+# Config: ~/.config/starship.toml (catppuccin-powerline preset, Mocha palette).
+# Falls back to Powerlevel10k if starship is absent — rollback = uninstall.
+if command -v starship >/dev/null; then
+  eval "$(starship init zsh)"
+else
+  for _p10k in /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme \
+               "$HOME/.local/share/powerlevel10k/powerlevel10k.zsh-theme"; do
+    [[ -r $_p10k ]] && source "$_p10k" && break
+  done
+  unset _p10k
+  # p10k user customizations (written by `p10k configure`)
+  [[ ! -f "${ZDOTDIR:-$HOME}/.p10k.zsh" ]] || source "${ZDOTDIR:-$HOME}/.p10k.zsh"
+fi
+
+# ── zoxide: smarter cd — jump to any directory you have visited (`z <name>`) ──
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
+# ── fzf: fuzzy ctrl-r history, ctrl-t file picker ─────────────────────────────
+command -v fzf >/dev/null && source <(fzf --zsh)
+# Catppuccin Mocha (matches Ghostty/tmux/herdr/delta).
+export FZF_DEFAULT_OPTS="--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a,border:#585b70,label:#cdd6f4"
+
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# ── Colorized ls ──────────────────────────────────────────────────────────────
+if [[ $OSTYPE == darwin* ]]; then
+  export CLICOLOR=1
+  export LSCOLORS=GxFxCxDxBxegedabagaced
+else
+  alias ls='ls --color=auto'   # GNU coreutils (Linux)
+fi
+alias ll='ls -lh'
+alias la='ls -lAh'
+alias l='ls -CF'
+
+# ── Syntax highlighting & autosuggestions ──────────────────────────────────────
+# Sourced last for real: these wrap ZLE widgets, so every plugin that creates
+# widgets (zoxide, fzf) must already be loaded.
+# brew paths on macOS; ~/.local/share fallback on Linux.
+for _zp in /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+           "$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"; do
+  [[ -r $_zp ]] && source "$_zp" && break
+done
+for _zp in /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+           "$HOME/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"; do
+  [[ -r $_zp ]] && source "$_zp" && break
+done
+unset _zp
+
+# ── Machine-local overrides (NOT chezmoi-managed; never synced) ────────────────
+[[ -f "${ZDOTDIR:-$HOME}/local.zsh" ]] && source "${ZDOTDIR:-$HOME}/local.zsh"

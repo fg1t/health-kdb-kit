@@ -1,0 +1,10 @@
+# Per-machine overrides — NOT tracked in git.
+# Copy this to 'local' and edit:   cp local.example local
+# The main config includes it via:  config-file = ?./local
+# Later files win, so anything here overrides the shared config.
+#
+# Examples (uncomment in your real 'local' file):
+# font-size = 15
+# background-opacity = 1.0
+# theme = Dracula
+# keybind = cmd+enter=toggle_fullscreen

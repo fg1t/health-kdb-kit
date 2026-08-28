@@ -1,0 +1,2 @@
+# Per-machine environment (sourced by ~/.zshenv through ZDOTDIR).
+# Intentionally empty by default — add machine-local exports here if ever needed.
